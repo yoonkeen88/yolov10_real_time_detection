@@ -4,7 +4,7 @@ from ultralytics import YOLO
 import os
 
 # Load your YOLO model here
-model = YOLO('C:/python_project/CV_drowsy_detect/runs/detect/train7/weights/best.pt')
+model = YOLO('best.pt')
 
 def gen_frames():
     cap = cv2.VideoCapture(0)  # Use 0 for webcam
