@@ -4,22 +4,22 @@ from ultralytics import YOLO
 import os
 
 # Load your YOLO model here
-model = YOLO('/Users/angwang-yun/Desktop/Project/yolov10_real_time_detection/yolov10/yolov10n.pt')
+model = YOLO('C:/python_project/CV_drowsy_detect/runs/detect/train7/weights/best.pt')
 
 def gen_frames():
     cap = cv2.VideoCapture(0)  # Use 0 for webcam
     if not cap.isOpened():
         print("Error: Could not open webcam.")
-        return  # �쎒罹좎쓣 �뿴 �닔 �뾾�뒗 寃쎌슦 �븿�닔 醫낅즺
+        return  
     
     while True:
         success, frame = cap.read()
         if not success:
             break
         results = model(frame)
-        # YOLOv8 �씠�썑 踰꾩쟾�뿉�꽌�뒗 �씠誘몄���뿉 吏곸젒 洹몃━湲�
+        
         for result in results:
-            annotated_frame = result.plot()  # result.render() ����떊 result.plot() �궗�슜
+            annotated_frame = result.plot() 
         # Resize frame to 1000x1000
         annotated_frame = cv2.resize(annotated_frame, (1000, 1000))
         ret, buffer = cv2.imencode('.jpg', annotated_frame)

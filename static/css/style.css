@@ -1,99 +1,106 @@
-/* 기본적인 페이지 스타일 설정 */
+/* 기존 스타일들 유지 */
+
 body {
-    font-family: Arial, sans-serif; /* Arial 폰트를 기본으로 사용하고, 없을 경우 sans-serif 폰트를 사용 */
-    margin: 0; /* 페이지의 기본 마진을 0으로 설정 */
-    padding: 0; /* 페이지의 기본 패딩을 0으로 설정 */
-    background-color: #f4f4f9; /* 페이지의 배경색을 연한 회색으로 설정 */
-    color: #333; /* 기본 텍스트 색상을 짙은 회색으로 설정 */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
 }
 
-/* 헤더 제목 스타일 설정 */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
 h1 {
-    text-align: center; /* 텍스트를 중앙에 정렬 */
-    color: #333; /* 제목의 텍스트 색상을 짙은 회색으로 설정 */
-    padding: 20px; /* 제목 주위에 20px의 패딩을 추가 */
-    background-color: #fff; /* 제목의 배경색을 흰색으로 설정 */
-    border-bottom: 2px solid #eee; /* 제목 아래에 얇은 회색 테두리를 추가 */
-    margin: 0; /* 기본 마진을 0으로 설정 */
+    text-align: center;
+    color: #333;
+    padding: 20px;
+    background-color: #fff;
+    border-bottom: 2px solid #eee;
+    margin-bottom: 40px;
 }
 
-/* 버튼 스타일 설정 */
+.content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.feature {
+    width: 45%;
+}
+
+.image-container {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    filter: blur(5px);
+    transition: filter 0.3s ease-in-out;
+}
+
+.image-container:hover img {
+    filter: blur(0);
+}
+
+.overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    border-radius: 0 0 20px 20px;
+}
+
 button {
-    background-color: #007bff; /* 버튼의 배경색을 파란색으로 설정 */
-    border: none; /* 버튼의 테두리를 없앰 */
-    color: #fff; /* 버튼의 텍스트 색상을 흰색으로 설정 */
-    padding: 10px 20px; /* 버튼의 내부 여백을 10px 위아래, 20px 좌우로 설정 */
-    text-align: center; /* 버튼 내부 텍스트를 중앙에 정렬 */
-    text-decoration: none; /* 버튼 텍스트에 밑줄 제거 */
-    display: inline-block; /* 버튼을 인라인 블록 요소로 설정 */
-    font-size: 16px; /* 버튼 텍스트의 폰트 크기를 16px로 설정 */
-    margin: 10px 5px; /* 버튼 외부 마진을 위아래 10px, 좌우 5px로 설정 */
-    cursor: pointer; /* 마우스를 버튼 위에 올렸을 때 포인터 커서로 변경 */
-    border-radius: 5px; /* 버튼 모서리를 둥글게 5px로 설정 */
-    transition: background-color 0.3s ease; /* 배경색 변경에 0.3초의 트랜지션 효과 추가 */
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background-color: #0056b3; /* 마우스를 올렸을 때 버튼의 배경색을 더 짙은 파란색으로 변경 */
-    transform: scale(1.05); /* 버튼을 살짝 확대하여 클릭할 때의 효과를 줌 */
-    transition: all 0.2s ease-in-out; /* 모든 트랜지션에 0.2초의 ease-in-out 효과 추가 */
+    background-color: #0056b3;
+    transform: scale(1.05);
+    transition: all 0.2s ease-in-out;
 }
 
-/* 페이지 레이아웃의 중심 설정 */
-.container {
-    max-width: 1200px; /* 컨테이너의 최대 너비를 1200px로 설정 */
-    margin: 0 auto; /* 컨테이너를 수평으로 중앙에 배치 */
-    padding: 20px; /* 컨테이너 내부에 20px의 패딩을 추가 */
+.description {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* 폼 컨테이너 스타일 설정 */
-.form-container {
-    display: flex; /* 컨테이너를 플렉스 박스로 설정 */
-    justify-content: center; /* 컨텐츠를 가로축 중앙으로 정렬 */
-    align-items: center; /* 컨텐츠를 세로축 중앙으로 정렬 */
-    flex-direction: column; /* 컨텐츠를 세로로 쌓이게 설정 */
+/* 추가된 이미지 스타일 */
+.additional-image {
+    margin-top: 40px;
 }
 
-/* 폼 스타일 설정 */
-form {
-    background-color: #fff; /* 폼의 배경색을 흰색으로 설정 */
-    padding: 20px; /* 폼 내부에 20px의 패딩을 추가 */
-    border-radius: 8px; /* 폼 모서리를 8px로 둥글게 설정 */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 폼에 그림자 효과를 추가 */
-    width: 100%; /* 폼의 너비를 100%로 설정 */
-    max-width: 600px; /* 폼의 최대 너비를 600px로 제한 */
-    margin: 0 auto; /* 폼을 수평으로 중앙에 배치 */
-}
-
-/* 파일 입력 필드 스타일 설정 */
-input[type="file"] {
-    margin: 10px 0; /* 파일 입력 필드의 위아래에 10px의 마진을 추가 */
-}
-
-/* 제출 버튼 스타일 설정 */
-input[type="submit"] {
-    background-color: #28a745; /* 제출 버튼의 배경색을 녹색으로 설정 */
-    border: none; /* 제출 버튼의 테두리를 없앰 */
-    color: #fff; /* 제출 버튼의 텍스트 색상을 흰색으로 설정 */
-    padding: 10px 20px; /* 제출 버튼 내부 여백을 10px 위아래, 20px 좌우로 설정 */
-    text-align: center; /* 제출 버튼 텍스트를 중앙에 정렬 */
-    text-decoration: none; /* 제출 버튼 텍스트에 밑줄 제거 */
-    display: inline-block; /* 제출 버튼을 인라인 블록 요소로 설정 */
-    font-size: 16px; /* 제출 버튼 텍스트의 폰트 크기를 16px로 설정 */
-    cursor: pointer; /* 마우스를 제출 버튼 위에 올렸을 때 포인터 커서로 변경 */
-    border-radius: 5px; /* 제출 버튼 모서리를 둥글게 5px로 설정 */
-    transition: background-color 0.3s ease; /* 배경색 변경에 0.3초의 트랜지션 효과 추가 */
-}
-
-input[type="submit"]:hover {
-    background-color: #218838; /* 마우스를 올렸을 때 제출 버튼의 배경색을 더 짙은 녹색으로 변경 */
-}
-
-/* 이미지 스타일 설정 */
-img {
-    display: block; /* 이미지를 블록 요소로 설정하여 줄바꿈 발생 */
-    margin: 0 auto; /* 이미지를 수평으로 중앙에 배치 */
-    border: 1px solid #ddd; /* 이미지에 얇은 회색 테두리를 추가 */
-    border-radius: 8px; /* 이미지 모서리를 둥글게 8px로 설정 */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 이미지에 그림자 효과를 추가 */
+.additional-image img {
+    width: 60%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }

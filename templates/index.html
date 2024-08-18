@@ -1,22 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YOLOv10 Real-Time Detection</title>
+    <title>YOLOv10 Real-Time Drowsy Detection Service</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
+
 <body>
     <div class="container">
-        <h1>YOLOv10 Real-Time Object Detection</h1>
-        <div>
-            <a href="{{ url_for('main.webcam') }}">
-                <button>Webcam Stream</button>
-            </a>
-            <a href="{{ url_for('main.upload') }}">
-                <button>Upload Video</button>
-            </a>
+        <h1>YOLOv10 Real-Time Drowsy Detection Service</h1>
+        <div class="content">
+            <div class="feature">
+                <div class="image-container">
+                    <img src="{{ url_for('static', filename='images/kiss.jpg') }}" alt="Webcam Drowsy Detection">
+                    <div class="overlay">
+                        <p>Real-time drowsiness detection using your webcam. Click below to start.</p>
+                        <a href="{{ url_for('main.webcam') }}">
+                            <button>Webcam Drowsy Detection Streaming</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="feature">
+                <div class="image-container">
+                    <img src="{{ url_for('static', filename='images/kiss.jpg') }}" alt="Upload Video for Analysis">
+                    <div class="overlay">
+                        <p>Upload a video for drowsiness analysis and receive feedback. Click below to upload.</p>
+                        <a href="{{ url_for('main.upload') }}">
+                            <button>Upload Video and Feedback</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="description">
+            <p>Our YOLOv10-based service provides real-time drowsy detection using advanced machine learning algorithms. Whether you need live monitoring through your webcam or post-analysis of recorded videos, our service is designed to ensure safety and reliability.</p>
+        </div>
+
+        <!-- 추가된 이미지 -->
+        <div class="additional-image">
+            <img src="{{ url_for('static', filename='images/home.jpg') }}" alt="Additional Information">
         </div>
     </div>
 </body>
+
 </html>
