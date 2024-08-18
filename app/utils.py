@@ -32,7 +32,7 @@ def gen_frames():
 
         for result in results:
             for box in result.boxes:
-                if 'drowsy' in result.names[int(box.cls)]:
+                if 'Drowsy' in result.names[int(box.cls)]:
                     drowsy_detections.append(current_time)
                     # 10초가 지난 감지 시간은 리스트에서 제거
                     drowsy_detections = [t for t in drowsy_detections if current_time - t <= 10]
