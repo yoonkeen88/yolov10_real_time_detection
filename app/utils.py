@@ -32,7 +32,13 @@ def gen_frames():
 
         for result in results:
             for box in result.boxes:
-                if 'Drowsy' in result.names[int(box.cls)]:
+                # 클래스 이름과 확률을 추출
+                class_name = result.names[int(box.cls)]
+                confidence = box.conf
+                label = f"{class_name} {confidence:.2f}"
+
+                # "Drowsy"가 감지되었는지 확인
+                if "Drowsy" in label:
                     drowsy_detections.append(current_time)
                     # 10초가 지난 감지 시간은 리스트에서 제거
                     drowsy_detections = [t for t in drowsy_detections if current_time - t <= 10]
@@ -46,6 +52,10 @@ def gen_frames():
         frame = buffer.tobytes()
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+        
+
+
+
 
 def process_video(filepath):
     # Create output file path

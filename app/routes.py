@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, Response, request, redirect, url_for, send_file, current_app
+from flask import Blueprint, render_template, Response, request, redirect, url_for, send_file, current_app, jsonify
 from werkzeug.utils import secure_filename
 import os
 from .utils import gen_frames, process_video  
@@ -12,6 +12,13 @@ def index():
 @main.route('/webcam')
 def webcam():
     return render_template('webcam.html')
+
+@main.route('/check_drowsy')
+def check_drowsy():
+    global drowsy_detections
+    if len(drowsy_detections) >= 5:  # 경고를 위한 임계값 설정 (예: 5회)
+        return jsonify({"warning": True})
+    return jsonify({"warning": False})
 
 @main.route('/video_feed')
 def video_feed():
