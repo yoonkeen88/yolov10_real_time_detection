@@ -7,11 +7,8 @@ from ultralytics import YOLO
 # from .utils import gen_frames, process_video
 from werkzeug.utils import secure_filename
 
-
 # Initialize SocketIO
 socketio = SocketIO()
-
-
 main = Blueprint('main', __name__)
 
 @main.route('/')
@@ -39,19 +36,18 @@ def gen_frames():
 
     while True:
         success, frame = cap.read()
+
         if not success:
             break
 
         results = model(frame)
-
-        # 현재 시간
-        current_time = time.time()
+        current_time = time.time() # 현재 시간
 
         for result in results:
             for box in result.boxes:
                 # 클래스 이름과 확률을 추출
                 class_name = result.names[int(box.cls)]
-                confidence = box.conf.item()  # Tensor를 Python 숫자로 변환
+                confidence = box.conf.item()  # Tensor를 Python 숫자로 변환 여기서 잘 안되는듯..
                 label = f"{class_name} {confidence:.2f}"
 
                 # "Drowsy"가 감지되었는지 확인
@@ -62,8 +58,9 @@ def gen_frames():
                     break
             
             annotated_frame = result.plot()
+        # 추가적으로 yawn 과 head drop 등과의 상관관계를 이요애서 에러를 띄어주는 것도 나쁘지 않음.
 
-        # 프레임 크기 조정 (1000x1000)
+        # 프레임 크기 조정 (1000x1000) 
         annotated_frame = cv2.resize(annotated_frame, (1000, 1000))
         ret, buffer = cv2.imencode('.jpg', annotated_frame)
         frame = buffer.tobytes()
