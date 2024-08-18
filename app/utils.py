@@ -10,16 +10,16 @@ def gen_frames():
     cap = cv2.VideoCapture(0)  # Use 0 for webcam
     if not cap.isOpened():
         print("Error: Could not open webcam.")
-        return  # 웹캠을 열 수 없는 경우 함수 종료
+        return  # �쎒罹좎쓣 �뿴 �닔 �뾾�뒗 寃쎌슦 �븿�닔 醫낅즺
     
     while True:
         success, frame = cap.read()
         if not success:
             break
         results = model(frame)
-        # YOLOv8 이후 버전에서는 이미지에 직접 그리기
+        # YOLOv8 �씠�썑 踰꾩쟾�뿉�꽌�뒗 �씠誘몄���뿉 吏곸젒 洹몃━湲�
         for result in results:
-            annotated_frame = result.plot()  # result.render() 대신 result.plot() 사용
+            annotated_frame = result.plot()  # result.render() ����떊 result.plot() �궗�슜
         # Resize frame to 1000x1000
         annotated_frame = cv2.resize(annotated_frame, (1000, 1000))
         ret, buffer = cv2.imencode('.jpg', annotated_frame)

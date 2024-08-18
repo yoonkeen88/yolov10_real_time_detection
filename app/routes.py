@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, Response, request, redirect, url_for, send_file, current_app
 from werkzeug.utils import secure_filename
 import os
-from .utils import gen_frames, process_video  # 비디오 처리 기능 가져오기
+from .utils import gen_frames, process_video  # 鍮꾨뵒�삤 泥섎━ 湲곕뒫 媛��졇�삤湲�
 
 main = Blueprint('main', __name__)
 
