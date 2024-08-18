@@ -1,17 +1,22 @@
 from flask import Flask
-from flask import Flask
+from flask_socketio import SocketIO
+from app.routes import main as routes_blueprint, socketio
 
 def create_app():
     app = Flask(__name__)
+    app.config['SECRET_KEY'] = 'your_secret_key'
     app.config['UPLOAD_FOLDER'] = 'uploads'
     app.config['ALLOWED_EXTENSIONS'] = {'mp4', 'avi', 'mov'}
-    
-    with app.app_context():
-        from app.routes import main
-        app.register_blueprint(main)
-    
+
+    # Initialize SocketIO
+    socketio.init_app(app)
+
+    # Register blueprints
+    app.register_blueprint(routes_blueprint)
+
     return app
 
-if __name__ == "__main__":
-    app = create_app()
-    app.run(host='0.0.0.0', port=5001, debug=True)
+app = create_app()
+
+if __name__ == '__main__':
+    socketio.run(app, debug=True)
