@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Webcam Stream with YOLOv10</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script>
+        function checkDrowsiness() {
+            fetch('/check_drowsy')
+            .then(response => response.json())
+            .then(data => {
+                if (data.warning) {
+                    alert('Warning: Drowsiness detected multiple times within 10 seconds!');
+                }
+            });
+        }
+
+        setInterval(checkDrowsiness, 2000);  // 2초마다 체크
+    </script>
 </head>
 <body>
     <div class="container">
