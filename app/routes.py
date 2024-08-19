@@ -28,6 +28,34 @@ model = YOLO('best.pt')
 # "drowsy" 감지 시간 저장을 위한 리스트를 모듈 수준에서 선언
 drowsy_detections = []
 
+# def gen_frames():
+#     cap = cv2.VideoCapture(0)  # 웹캠 인덱스
+#     if not cap.isOpened():
+#         print("Error: Could not open webcam.")
+#         return
+
+#     while True:
+#         success, frame = cap.read()
+
+#         if not success:
+#             break
+
+#         # YOLO 모델로 프레임을 처리합니다.
+#         results = model(frame)
+
+#         # 결과를 시각화합니다.
+#         annotated_frame = results[0].plot()  # 결과의 첫 번째 이미지에 대한 플롯을 얻음
+
+#         # 프레임 크기 조정 (1000x1000)
+#         annotated_frame = cv2.resize(annotated_frame, (1000, 1000))
+#         ret, buffer = cv2.imencode('.jpg', annotated_frame)
+#         frame = buffer.tobytes()
+
+#         # 프레임 전송
+#         yield (b'--frame\r\n'
+#                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+
+#     cap.release()
 def gen_frames():
     cap = cv2.VideoCapture(0)  # 웹캠 인덱스
     if not cap.isOpened():
@@ -38,31 +66,33 @@ def gen_frames():
         success, frame = cap.read()
 
         if not success:
+            print("Failed to read frame.")
             break
 
         results = model(frame)
-        current_time = time.time() # 현재 시간
+        
+        # 모델 결과의 구조 확인
+        if isinstance(results, list) and len(results) > 0:
+            predictions = results[0]
+        elif isinstance(results, dict):
+            predictions = results.get('pred')  # 'pred' 키로 데이터를 가져옴
+        else:
+            print("Unexpected results structure")
+            continue
 
-        for result in results:
-            for box in result.boxes:
-                # 클래스 이름과 확률을 추출
-                class_name = result.names[int(box.cls)]
-                confidence = box.conf.item()  # Tensor를 Python 숫자로 변환 여기서 잘 안되는듯..
-                label = f"{class_name} {confidence:.2f}"
+        # predictions의 구조 확인
+        if isinstance(predictions, list) and len(predictions) > 0:
+            annotated_frame = predictions[0].plot()  # 일반적인 경우
+        else:
+            print("No valid predictions found.")
+            continue
 
-                # "Drowsy"가 감지되었는지 확인
-                if "Drowsy" in label:
-                    drowsy_detections.append(current_time)
-                    # 10초가 지난 감지 시간은 리스트에서 제거
-                    drowsy_detections[:] = [t for t in drowsy_detections if current_time - t <= 10]
-                    break
-            
-            annotated_frame = result.plot()
-        # 추가적으로 yawn 과 head drop 등과의 상관관계를 이요애서 에러를 띄어주는 것도 나쁘지 않음.
-
-        # 프레임 크기 조정 (1000x1000) 
+        # 프레임 크기 조정 (1000x1000)
         annotated_frame = cv2.resize(annotated_frame, (1000, 1000))
         ret, buffer = cv2.imencode('.jpg', annotated_frame)
+        if not ret:
+            print("Failed to encode frame.")
+            continue
         frame = buffer.tobytes()
 
         # 프레임 전송
@@ -70,6 +100,8 @@ def gen_frames():
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
     cap.release()
+    print("Capture released.")
+
 
 
 @main.route('/upload')

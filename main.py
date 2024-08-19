@@ -19,4 +19,6 @@ def create_app():
 app = create_app()
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True)
+    # Run the app on port 8080 instead of the default port 5000
+    socketio.run(app, debug=True, port=8080)
+    

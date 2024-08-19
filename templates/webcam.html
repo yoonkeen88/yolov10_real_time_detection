@@ -5,30 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Webcam Stream with YOLOv10</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
-    <script>
-        let drowsyAlertShown = false;
-
-        document.addEventListener('DOMContentLoaded', (event) => {
-            // Connect to the socket.io server
-            const socket = io();
-
-            socket.on('drowsy_detected', (data) => {
-                if (data.warning && !drowsyAlertShown) {
-                    alert('Warning: Drowsiness detected!');
-                    drowsyAlertShown = true;
-                    setTimeout(() => {
-                        drowsyAlertShown = false;
-                    }, 2000); // Alert shown for 2 seconds
-                }
-            });
-        });
-    </script>
 </head>
 <body>
     <div class="container">
         <h1>Webcam Stream with YOLOv10</h1>
-        <img src="{{ url_for('main.video_feed') }}" alt="Video Feed" style="width: 1000px; height: 1000px;">
+        <div class="video-container">
+            <img src="{{ url_for('main.video_feed') }}" alt="Video Feed">
+        </div>
     </div>
 </body>
 </html>

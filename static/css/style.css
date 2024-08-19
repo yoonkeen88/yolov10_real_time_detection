@@ -104,3 +104,48 @@ button:hover {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+
+/* 기존 스타일들 유지 */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    padding: 20px;
+    background-color: #fff;
+    border-bottom: 2px solid #eee;
+    margin-bottom: 40px;
+}
+
+.video-container {
+    width: 1000px;
+    height: 1000px;
+    overflow: hidden;
+    display: inline-block;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.video-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%; /* 둥근 모양으로 만듦 */
+}
+
+/* 기존의 다른 스타일들 유지 */
+
